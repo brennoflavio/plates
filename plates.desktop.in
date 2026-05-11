@@ -1,0 +1,8 @@
+[Desktop Entry]
+_Name=Plates
+Exec=qmlscene %U qml/Main.qml
+Icon=assets/logo.png
+Terminal=false
+Type=Application
+X-Lomiri-Touch=true
+Keywords=gym;

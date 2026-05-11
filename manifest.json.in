@@ -1,0 +1,15 @@
+{
+    "name": "plates.brennoflavio",
+    "description": "Calcluate how many plates you should use in your gym exercises",
+    "architecture": "@CLICK_ARCH@",
+    "title": "Plates",
+    "hooks": {
+        "plates": {
+            "apparmor": "plates.apparmor",
+            "desktop":  "plates.desktop"
+        }
+    },
+    "version": "@BUILD_VERSION@",
+    "maintainer": "Brenno Flávio de Almeida <contato@brennoflavio.com.br>",
+    "framework" : "@CLICK_FRAMEWORK@"
+}
