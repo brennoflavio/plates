@@ -15,9 +15,44 @@ Page {
     property bool showNameField: true
     property bool hasLoaded: false
 
-    function displayItemLabel(itemName, itemWeight) {
+    function displayItemName(itemName, itemNameKey) {
+        if (navigationRoot && itemNameKey)
+            return navigationRoot.translateItemName(itemName, itemNameKey);
+
+        return itemName;
+    }
+
+    function editableItemName(itemName, itemNameKey) {
+        if (itemNameKey)
+            return displayItemName(itemName, itemNameKey);
+
+        return itemName;
+    }
+
+    function resolveItemName(itemName, itemNameKey, inputText) {
+        var trimmedName = inputText.trim();
+        if (!showNameField)
+            return {
+                "itemName": "",
+                "itemNameKey": ""
+            };
+
+        if (itemNameKey && trimmedName === displayItemName(itemName, itemNameKey)) {
+            return {
+                "itemName": "",
+                "itemNameKey": itemNameKey
+            };
+        }
+
+        return {
+            "itemName": trimmedName,
+            "itemNameKey": ""
+        };
+    }
+
+    function displayItemLabel(itemName, itemWeight, itemNameKey) {
         if (showNameField)
-            return itemName;
+            return displayItemName(itemName, itemNameKey);
 
         return i18n.tr("%1 kg").arg(itemWeight);
     }
@@ -33,7 +68,8 @@ Page {
             for (var index = 0; index < items.length; index++) {
                 itemModel.append({
                     "itemName": items[index].itemName,
-                    "itemWeight": items[index].itemWeight
+                    "itemWeight": items[index].itemWeight,
+                    "itemNameKey": items[index].itemNameKey || ""
                 });
             }
 
@@ -51,7 +87,8 @@ Page {
             var item = itemModel.get(index);
             storedItems.push({
                 "itemName": item.itemName,
-                "itemWeight": item.itemWeight
+                "itemWeight": item.itemWeight,
+                "itemNameKey": item.itemNameKey || ""
             });
         }
 
@@ -66,19 +103,21 @@ Page {
         persistItems();
     }
 
-    function updateItem(index, itemName, itemWeight) {
+    function updateItem(index, itemName, itemWeight, itemNameKey) {
         if (index < 0 || index >= itemModel.count)
             return;
 
         itemModel.setProperty(index, "itemName", itemName);
         itemModel.setProperty(index, "itemWeight", itemWeight);
+        itemModel.setProperty(index, "itemNameKey", itemNameKey || "");
         persistItems();
     }
 
-    function addItem(itemName, itemWeight) {
+    function addItem(itemName, itemWeight, itemNameKey) {
         itemModel.append({
             "itemName": itemName,
-            "itemWeight": itemWeight
+            "itemWeight": itemWeight,
+            "itemNameKey": itemNameKey || ""
         });
         persistItems();
     }
@@ -135,7 +174,7 @@ Page {
                     left: parent.left
                     right: parent.right
                 }
-                title.text: displayItemLabel(itemName, itemWeight)
+                title.text: displayItemLabel(itemName, itemWeight, itemNameKey)
                 subtitle.text: showNameField ? i18n.tr("%1 kg").arg(itemWeight) : ""
             }
 
@@ -160,7 +199,7 @@ Page {
                         onTriggered: {
                             PopupUtils.open(deleteItemDialog, null, {
                                 "itemIndex": index,
-                                "itemLabel": weightedItemsPage.displayItemLabel(itemName, itemWeight)
+                                "itemLabel": weightedItemsPage.displayItemLabel(itemName, itemWeight, itemNameKey)
                             });
                         }
                     }
@@ -176,7 +215,8 @@ Page {
                             PopupUtils.open(itemDialog, null, {
                                 "itemIndex": index,
                                 "itemName": itemName,
-                                "itemWeight": itemWeight
+                                "itemWeight": itemWeight,
+                                "itemNameKey": itemNameKey || ""
                             });
                         }
                     }
@@ -205,7 +245,8 @@ Page {
             PopupUtils.open(itemDialog, null, {
                 "itemIndex": -1,
                 "itemName": "",
-                "itemWeight": ""
+                "itemWeight": "",
+                "itemNameKey": ""
             });
         }
     }
@@ -263,6 +304,7 @@ Page {
             property int itemIndex: -1
             property string itemName: ""
             property string itemWeight: ""
+            property string itemNameKey: ""
             property bool isEditing: itemIndex >= 0
 
             title: isEditing ? i18n.tr("Edit %1").arg(singularLabel) : i18n.tr("Add %1").arg(singularLabel)
@@ -281,7 +323,7 @@ Page {
                 width: parent.width
                 height: visible ? implicitHeight : 0
                 placeholderText: i18n.tr("Name")
-                text: itemDialogue.itemName
+                text: weightedItemsPage.editableItemName(itemDialogue.itemName, itemDialogue.itemNameKey)
             }
 
             Label {
@@ -308,11 +350,11 @@ Page {
                 color: theme.palette.normal.positive
                 enabled: (!showNameField || itemNameField.text.trim() !== "") && itemWeightField.acceptableInput && itemWeightField.text.trim() !== ""
                 onClicked: {
-                    var itemName = showNameField ? itemNameField.text.trim() : "";
+                    var resolvedItemName = weightedItemsPage.resolveItemName(itemDialogue.itemName, itemDialogue.itemNameKey, itemNameField.text);
                     if (itemDialogue.isEditing)
-                        weightedItemsPage.updateItem(itemDialogue.itemIndex, itemName, itemWeightField.text.trim());
+                        weightedItemsPage.updateItem(itemDialogue.itemIndex, resolvedItemName.itemName, itemWeightField.text.trim(), resolvedItemName.itemNameKey);
                     else
-                        weightedItemsPage.addItem(itemName, itemWeightField.text.trim());
+                        weightedItemsPage.addItem(resolvedItemName.itemName, itemWeightField.text.trim(), resolvedItemName.itemNameKey);
                     PopupUtils.close(itemDialogue);
                 }
             }

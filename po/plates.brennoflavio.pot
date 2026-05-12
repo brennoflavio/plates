@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plates.brennoflavio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-05 22:16+0000\n"
+"POT-Creation-Date: 2026-05-12 16:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/AppBottomBar.qml:13 ../qml/Main.qml:230
+#: ../qml/AppBottomBar.qml:13 ../qml/Main.qml:336
 msgid "Calculator"
 msgstr ""
 
@@ -37,27 +37,129 @@ msgstr ""
 msgid "No bars yet"
 msgstr ""
 
-#: ../qml/Main.qml:151
-msgid "Failed to load bars"
-msgstr ""
-
-#: ../qml/Main.qml:262
+#: ../qml/Main.qml:53 ../qml/Main.qml:368
 msgid "Target weight"
 msgstr ""
 
-#: ../qml/Main.qml:288
+#: ../qml/Main.qml:55
+msgid "Bar weight"
+msgstr ""
+
+#: ../qml/Main.qml:57
+msgid "Plate weight"
+msgstr ""
+
+#: ../qml/Main.qml:59 ../qml/WeightedItemsPage.qml:331
+#: ../qml/WeightedItemsPage.qml:338
+msgid "Weight"
+msgstr ""
+
+#: ../qml/Main.qml:66
+msgid "Standard bar"
+msgstr ""
+
+#: ../qml/Main.qml:68
+msgid "Short bar"
+msgstr ""
+
+#: ../qml/Main.qml:70
+msgid "EZ bar"
+msgstr ""
+
+#: ../qml/Main.qml:72
+msgid "No bar"
+msgstr ""
+
+#: ../qml/Main.qml:84 ../qml/WeightedItemsPage.qml:57
+#: ../qml/WeightedItemsPage.qml:178
+msgid "%1 kg"
+msgstr ""
+
+#: ../qml/Main.qml:86
+msgid "%1 (%2 kg)"
+msgstr ""
+
+#: ../qml/Main.qml:94
+msgid "Backend not ready"
+msgstr ""
+
+#: ../qml/Main.qml:96
+msgid "Empty calculation response"
+msgstr ""
+
+#: ../qml/Main.qml:98
+msgid "Unknown items key"
+msgstr ""
+
+#: ../qml/Main.qml:100
+msgid "%1 is required"
+msgstr ""
+
+#: ../qml/Main.qml:102
+msgid "%1 must be a valid number"
+msgstr ""
+
+#: ../qml/Main.qml:104
+msgid "%1 cannot be negative"
+msgstr ""
+
+#: ../qml/Main.qml:106
+msgid "%1 can have at most %2 decimal places"
+msgstr ""
+
+#: ../qml/Main.qml:108
+msgid "%1 cannot be greater than %2 kg"
+msgstr ""
+
+#: ../qml/Main.qml:110
+msgid "No valid plates are available for calculation."
+msgstr ""
+
+#: ../qml/Main.qml:112
+msgid "Something went wrong while talking to the backend."
+msgstr ""
+
+#: ../qml/Main.qml:114
+msgid "Unknown error"
+msgstr ""
+
+#: ../qml/Main.qml:123
+msgid ""
+"Target weight is lower than the selected bar weight. Using the bar only."
+msgstr ""
+
+#: ../qml/Main.qml:125
+msgid ""
+"Exact target is not possible with the available plates. Using %1 kg instead "
+"of %2 kg."
+msgstr ""
+
+#: ../qml/Main.qml:255
+msgid "Failed to load bars"
+msgstr ""
+
+#: ../qml/Main.qml:394
 msgid "Bar"
 msgstr ""
 
-#: ../qml/Main.qml:311
+#: ../qml/Main.qml:429
+msgid "single side equipment"
+msgstr ""
+
+#: ../qml/Main.qml:437
 msgid "No bars available"
 msgstr ""
 
-#: ../qml/Main.qml:318
+#: ../qml/Main.qml:444
 msgid "Calculate"
 msgstr ""
 
-#: ../qml/Main.qml:338
+#: ../qml/Main.qml:465
+msgid ""
+"You asked for %1. This setup gives %2 total, with %3 on the loaded side."
+msgstr ""
+
+#: ../qml/Main.qml:466
 msgid "You asked for %1. This setup gives %2 total, with %3 on each side."
 msgstr ""
 
@@ -69,47 +171,39 @@ msgstr ""
 msgid "No plates yet"
 msgstr ""
 
-#: ../qml/WeightedItemsPage.qml:22 ../qml/WeightedItemsPage.qml:139
-msgid "%1 kg"
-msgstr ""
-
-#: ../qml/WeightedItemsPage.qml:159 ../qml/WeightedItemsPage.qml:239
+#: ../qml/WeightedItemsPage.qml:198 ../qml/WeightedItemsPage.qml:280
 msgid "Delete"
 msgstr ""
 
-#: ../qml/WeightedItemsPage.qml:174
+#: ../qml/WeightedItemsPage.qml:213
 msgid "Edit"
 msgstr ""
 
-#: ../qml/WeightedItemsPage.qml:202 ../qml/WeightedItemsPage.qml:268
+#: ../qml/WeightedItemsPage.qml:242 ../qml/WeightedItemsPage.qml:310
 msgid "Add %1"
 msgstr ""
 
-#: ../qml/WeightedItemsPage.qml:234
+#: ../qml/WeightedItemsPage.qml:275
 msgid "Delete %1"
 msgstr ""
 
-#: ../qml/WeightedItemsPage.qml:235
+#: ../qml/WeightedItemsPage.qml:276
 msgid "Are you sure you want to delete %1?"
 msgstr ""
 
-#: ../qml/WeightedItemsPage.qml:249 ../qml/WeightedItemsPage.qml:322
+#: ../qml/WeightedItemsPage.qml:290 ../qml/WeightedItemsPage.qml:364
 msgid "Cancel"
 msgstr ""
 
-#: ../qml/WeightedItemsPage.qml:268
+#: ../qml/WeightedItemsPage.qml:310
 msgid "Edit %1"
 msgstr ""
 
-#: ../qml/WeightedItemsPage.qml:274 ../qml/WeightedItemsPage.qml:283
+#: ../qml/WeightedItemsPage.qml:316 ../qml/WeightedItemsPage.qml:325
 msgid "Name"
 msgstr ""
 
-#: ../qml/WeightedItemsPage.qml:289 ../qml/WeightedItemsPage.qml:296
-msgid "Weight"
-msgstr ""
-
-#: ../qml/WeightedItemsPage.qml:307
+#: ../qml/WeightedItemsPage.qml:349
 msgid "Save"
 msgstr ""
 

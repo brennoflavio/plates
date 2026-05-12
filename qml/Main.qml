@@ -30,12 +30,111 @@ MainView {
     property bool backendReady: false
     property string lastPythonError: ""
 
+    function knownBarNameKey(itemName, itemNameKey) {
+        if (itemNameKey)
+            return itemNameKey;
+
+        var normalizedName = (itemName || "").trim().toLowerCase();
+        if (normalizedName === "standard")
+            return "standard";
+        if (normalizedName === "short")
+            return "short";
+        if (normalizedName === "ez bar")
+            return "ez_bar";
+        if (normalizedName === "no bar")
+            return "no_bar";
+
+        return "";
+    }
+
+    function translateFieldName(fieldKey) {
+        switch (fieldKey) {
+        case "target_weight":
+            return i18n.tr("Target weight");
+        case "bar_weight":
+            return i18n.tr("Bar weight");
+        case "plate_weight":
+            return i18n.tr("Plate weight");
+        default:
+            return i18n.tr("Weight");
+        }
+    }
+
+    function translateItemName(itemName, itemNameKey) {
+        switch (knownBarNameKey(itemName, itemNameKey)) {
+        case "standard":
+            return i18n.tr("Standard bar");
+        case "short":
+            return i18n.tr("Short bar");
+        case "ez_bar":
+            return i18n.tr("EZ bar");
+        case "no_bar":
+            return i18n.tr("No bar");
+        default:
+            return itemName || "";
+        }
+    }
+
+    function formatBarLabel(bar) {
+        if (!bar)
+            return "";
+
+        var barName = translateItemName(bar.itemName, bar.itemNameKey);
+        if (barName === "")
+            return i18n.tr("%1 kg").arg(bar.itemWeight);
+
+        return i18n.tr("%1 (%2 kg)").arg(barName).arg(bar.itemWeight);
+    }
+
+    function backendMessageText(messageKey, messageData) {
+        var data = messageData || {};
+
+        switch (messageKey) {
+        case "backend_not_ready":
+            return i18n.tr("Backend not ready");
+        case "empty_response":
+            return i18n.tr("Empty calculation response");
+        case "unknown_items_key":
+            return i18n.tr("Unknown items key");
+        case "weight_required":
+            return i18n.tr("%1 is required").arg(translateFieldName(data.field || ""));
+        case "weight_invalid_number":
+            return i18n.tr("%1 must be a valid number").arg(translateFieldName(data.field || ""));
+        case "weight_negative":
+            return i18n.tr("%1 cannot be negative").arg(translateFieldName(data.field || ""));
+        case "weight_too_many_decimals":
+            return i18n.tr("%1 can have at most %2 decimal places").arg(translateFieldName(data.field || "")).arg(data.maxDecimals || "");
+        case "weight_too_large":
+            return i18n.tr("%1 cannot be greater than %2 kg").arg(translateFieldName(data.field || "")).arg(data.maxWeight || "");
+        case "no_valid_plates":
+            return i18n.tr("No valid plates are available for calculation.");
+        case "unexpected_python_error":
+            return i18n.tr("Something went wrong while talking to the backend.");
+        default:
+            return messageKey ? i18n.tr("Unknown error") : "";
+        }
+    }
+
+    function backendNoteText(noteKey, noteData) {
+        var data = noteData || {};
+
+        switch (noteKey) {
+        case "target_lower_than_bar":
+            return i18n.tr("Target weight is lower than the selected bar weight. Using the bar only.");
+        case "inexact_match":
+            return i18n.tr("Exact target is not possible with the available plates. Using %1 kg instead of %2 kg.").arg(data.achievedWeight || "").arg(data.targetWeight || "");
+        default:
+            return "";
+        }
+    }
+
     function loadItems(itemsKey, callback) {
         if (!backendReady) {
             if (callback)
                 callback({
                     "success": false,
-                    "items": []
+                    "items": [],
+                    "messageKey": "backend_not_ready"
                 });
             return;
         }
@@ -45,7 +144,8 @@ MainView {
             if (callback)
                 callback(result || {
                     "success": false,
-                    "items": []
+                    "items": [],
+                    "messageKey": "empty_response"
                 });
         });
     }
@@ -54,7 +154,8 @@ MainView {
         if (!backendReady) {
             if (callback)
                 callback({
-                    "success": false
+                    "success": false,
+                    "messageKey": "backend_not_ready"
                 });
             return;
         }
@@ -63,27 +164,28 @@ MainView {
         python.call('main.save_weighted_items', [itemsKey, items], function(result) {
             if (callback)
                 callback(result || {
-                    "success": false
+                    "success": false,
+                    "messageKey": "empty_response"
                 });
         });
     }
 
-    function calculateBarbellPlates(bar, targetWeight, callback) {
+    function calculateBarbellPlates(bar, targetWeight, singleSideEquipment, callback) {
         if (!backendReady) {
             if (callback)
                 callback({
                     "success": false,
-                    "message": "Backend not ready"
+                    "messageKey": "backend_not_ready"
                 });
             return;
         }
 
         lastPythonError = "";
-        python.call('main.calculate_barbell_plates', [bar, targetWeight], function(result) {
+        python.call('main.calculate_barbell_plates', [bar, targetWeight, singleSideEquipment], function(result) {
             if (callback)
                 callback(result || {
                     "success": false,
-                    "message": "Empty calculation response"
+                    "messageKey": "empty_response"
                 });
         });
     }
@@ -132,6 +234,8 @@ MainView {
             property bool hasLoadedBars: false
             property bool isLoadingBars: false
             property bool isCalculating: false
+            property bool singleSideEquipment: false
+            property bool calculationSingleSideEquipment: false
             property string barLoadError: ""
             property string calculationErrorText: ""
             property var calculationResult: null
@@ -148,7 +252,7 @@ MainView {
 
                     if (!result || result.success === false) {
                         barsData = [];
-                        barLoadError = result && result.message ? result.message : i18n.tr("Failed to load bars");
+                        barLoadError = result && result.messageKey ? navigationRoot.backendMessageText(result.messageKey, result.messageData) : i18n.tr("Failed to load bars");
                         barSelector.selectedIndex = -1;
                         return;
                     }
@@ -170,24 +274,26 @@ MainView {
             }
 
             function formatBarLabel(bar) {
-                if (!bar)
+                if (!navigationRoot)
                     return "";
 
-                return bar.itemName + " (" + bar.itemWeight + " kg)";
+                return navigationRoot.formatBarLabel(bar);
             }
 
             function runCalculation() {
                 var selected = selectedBar();
+                var useSingleSideEquipment = singleSideEquipment;
                 if (!selected || targetWeightField.text.trim() === "" || !targetWeightField.isValid)
                     return;
 
                 isCalculating = true;
                 calculationResult = null;
                 calculationErrorText = "";
-                navigationRoot.calculateBarbellPlates(selected, targetWeightField.text.trim(), function(result) {
+                calculationSingleSideEquipment = useSingleSideEquipment;
+                navigationRoot.calculateBarbellPlates(selected, targetWeightField.text.trim(), useSingleSideEquipment, function(result) {
                     isCalculating = false;
                     calculationResult = result || null;
-                    calculationErrorText = result && result.success === false && result.message ? result.message : "";
+                    calculationErrorText = result && result.success === false && result.messageKey ? navigationRoot.backendMessageText(result.messageKey, result.messageData) : "";
                 });
             }
 
@@ -212,13 +318,13 @@ MainView {
                         calculatorPage.isLoadingBars = false;
                         calculatorPage.hasLoadedBars = true;
                         calculatorPage.barsData = [];
-                        calculatorPage.barLoadError = navigationRoot.lastPythonError;
+                        calculatorPage.barLoadError = navigationRoot.backendMessageText(navigationRoot.lastPythonError);
                     }
 
                     if (calculatorPage.isCalculating) {
                         calculatorPage.isCalculating = false;
                         calculatorPage.calculationResult = null;
-                        calculatorPage.calculationErrorText = navigationRoot.lastPythonError;
+                        calculatorPage.calculationErrorText = navigationRoot.backendMessageText(navigationRoot.lastPythonError);
                     }
                 }
             }
@@ -305,6 +411,26 @@ MainView {
                         }
                     }
 
+                    Row {
+                        width: parent.width
+                        spacing: units.gu(1)
+
+                        CheckBox {
+                            id: singleSideEquipmentCheckBox
+
+                            checked: calculatorPage.singleSideEquipment
+                            onClicked: {
+                                calculatorPage.singleSideEquipment = checked;
+                            }
+                        }
+
+                        Label {
+                            anchors.verticalCenter: singleSideEquipmentCheckBox.verticalCenter
+                            text: i18n.tr("single side equipment")
+                            color: theme.palette.normal.backgroundText
+                        }
+                    }
+
                     Label {
                         visible: barLoadError !== "" || (hasLoadedBars && barsData.length === 0)
                         width: parent.width
@@ -333,16 +459,18 @@ MainView {
                     }
 
                     Label {
-                        visible: calculationErrorText === "" && calculationResult && calculationResult.success && calculationResult.note === ""
+                        visible: calculationErrorText === "" && calculationResult && calculationResult.success && calculationResult.noteKey === ""
                         width: parent.width
-                        text: calculationResult ? i18n.tr("You asked for %1. This setup gives %2 total, with %3 on each side.").arg(calculationResult.targetWeight).arg(calculationResult.achievedTotalWeight).arg(calculationResult.achievedSideWeight) : ""
+                        text: !calculationResult ? "" : (calculationSingleSideEquipment
+                            ? i18n.tr("You asked for %1. This setup gives %2 total, with %3 on the loaded side.").arg(calculationResult.targetWeight).arg(calculationResult.achievedTotalWeight).arg(calculationResult.achievedSideWeight)
+                            : i18n.tr("You asked for %1. This setup gives %2 total, with %3 on each side.").arg(calculationResult.targetWeight).arg(calculationResult.achievedTotalWeight).arg(calculationResult.achievedSideWeight))
                         wrapMode: Text.WordWrap
                     }
 
                     Label {
-                        visible: calculationErrorText === "" && calculationResult && calculationResult.note !== ""
+                        visible: calculationErrorText === "" && calculationResult && calculationResult.noteKey !== ""
                         width: parent.width
-                        text: calculationResult ? calculationResult.note : ""
+                        text: calculationResult ? navigationRoot.backendNoteText(calculationResult.noteKey, calculationResult.noteData) : ""
                         color: theme.palette.normal.backgroundSecondaryText
                         wrapMode: Text.WordWrap
                     }
@@ -380,14 +508,14 @@ MainView {
                 console.log('module imported');
                 python.call('main.seed_data', [], function(result) {
                     if (result && result.success === false)
-                        console.log('seed error: ' + (result.message || 'unknown error'));
+                        console.log('seed error: ' + (result.messageKey || 'unknown_error'));
                     root.backendReady = true;
                 });
             });
         }
 
         onError: {
-            root.lastPythonError = traceback;
+            root.lastPythonError = "unexpected_python_error";
             console.log('python error: ' + traceback);
         }
     }

@@ -14,7 +14,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from decimal import Decimal, InvalidOperation
 from fractions import Fraction
 from math import lcm
@@ -27,29 +27,55 @@ PLATES_KEY = "plates"
 BARS_KEY = "bars"
 SEED_DONE_KEY = "seed.initial_data_done"
 
+FIELD_TARGET_WEIGHT = "target_weight"
+FIELD_BAR_WEIGHT = "bar_weight"
+FIELD_PLATE_WEIGHT = "plate_weight"
+
+BAR_NAME_STANDARD = "standard"
+BAR_NAME_SHORT = "short"
+BAR_NAME_EZ = "ez_bar"
+BAR_NAME_NONE = "no_bar"
+
+LEGACY_BAR_NAME_KEYS = {
+    "standard": BAR_NAME_STANDARD,
+    "short": BAR_NAME_SHORT,
+    "ez bar": BAR_NAME_EZ,
+    "no bar": BAR_NAME_NONE,
+}
+
 setup(APP_NAME)
 
 from ut_components.kv import KV
 from ut_components.utils import dataclass_to_dict
 
 
+class AppError(Exception):
+    def __init__(self, key: str, data: Optional[Dict[str, str]] = None):
+        super().__init__(key)
+        self.key = key
+        self.data = data or {}
+
+
 @dataclass
 class StandardResponse:
     success: bool
-    message: str = ""
+    messageKey: str = ""
+    messageData: Dict[str, str] = field(default_factory=dict)
 
 
 @dataclass
 class WeightedItem:
     itemName: str = ""
     itemWeight: str = ""
+    itemNameKey: str = ""
 
 
 @dataclass
 class WeightedItemsResponse:
     success: bool
     items: List[WeightedItem]
-    message: str = ""
+    messageKey: str = ""
+    messageData: Dict[str, str] = field(default_factory=dict)
 
 
 @dataclass
@@ -68,8 +94,10 @@ class CalculationResponse:
     achievedSideWeight: str
     plates: List[PlateLoad]
     exactMatch: bool
-    note: str = ""
-    message: str = ""
+    noteKey: str = ""
+    noteData: Dict[str, str] = field(default_factory=dict)
+    messageKey: str = ""
+    messageData: Dict[str, str] = field(default_factory=dict)
 
 
 MAX_WEIGHT = Decimal("2000")
@@ -86,10 +114,10 @@ SEED_ITEMS: Dict[str, List[WeightedItem]] = {
         WeightedItem(itemWeight="1"),
     ],
     BARS_KEY: [
-        WeightedItem(itemName="standard", itemWeight="20"),
-        WeightedItem(itemName="short", itemWeight="15"),
-        WeightedItem(itemName="ez bar", itemWeight="7.5"),
-        WeightedItem(itemName="no bar", itemWeight="0"),
+        WeightedItem(itemNameKey=BAR_NAME_STANDARD, itemWeight="20"),
+        WeightedItem(itemNameKey=BAR_NAME_SHORT, itemWeight="15"),
+        WeightedItem(itemNameKey=BAR_NAME_EZ, itemWeight="7.5"),
+        WeightedItem(itemNameKey=BAR_NAME_NONE, itemWeight="0"),
     ],
 }
 
@@ -102,24 +130,36 @@ def _seed_items(items_key: str) -> List[WeightedItem]:
     return SEED_ITEMS.get(items_key, [])
 
 
-def _fraction_from_weight(raw_weight: str, label: str = "Weight") -> Fraction:
+def _error(key: str, **data: str) -> AppError:
+    return AppError(key, {field: str(value) for field, value in data.items()})
+
+
+def _fraction_from_weight(raw_weight: str, field_key: str) -> Fraction:
     weight = str(raw_weight).strip()
     if weight == "":
-        raise ValueError(f"{label} is required")
+        raise _error("weight_required", field=field_key)
 
     try:
         decimal_weight = Decimal(weight)
     except InvalidOperation as error:
-        raise ValueError(f"{label} must be a valid number") from error
+        raise _error("weight_invalid_number", field=field_key) from error
 
     if decimal_weight < 0:
-        raise ValueError(f"{label} cannot be negative")
+        raise _error("weight_negative", field=field_key)
 
     if -decimal_weight.as_tuple().exponent > MAX_DECIMAL_PLACES:
-        raise ValueError(f"{label} can have at most {MAX_DECIMAL_PLACES} decimal places")
+        raise _error(
+            "weight_too_many_decimals",
+            field=field_key,
+            maxDecimals=str(MAX_DECIMAL_PLACES),
+        )
 
     if decimal_weight > MAX_WEIGHT:
-        raise ValueError(f"{label} cannot be greater than {_fraction_to_string(Fraction(MAX_WEIGHT))} kg")
+        raise _error(
+            "weight_too_large",
+            field=field_key,
+            maxWeight=_fraction_to_string(Fraction(MAX_WEIGHT)),
+        )
 
     return Fraction(decimal_weight)
 
@@ -137,12 +177,18 @@ def _fraction_to_string(value: Fraction) -> str:
 
 def _parse_item(items_key: str, raw_item: Dict) -> WeightedItem:
     item_name = str(raw_item.get("itemName", "")).strip()
+    item_name_key = str(raw_item.get("itemNameKey", "")).strip()
+
     if items_key == PLATES_KEY:
         item_name = ""
+        item_name_key = ""
+    elif item_name_key == "" and item_name.lower() in LEGACY_BAR_NAME_KEYS:
+        item_name_key = LEGACY_BAR_NAME_KEYS[item_name.lower()]
 
     return WeightedItem(
         itemName=item_name,
         itemWeight=str(raw_item.get("itemWeight", "")).strip(),
+        itemNameKey=item_name_key,
     )
 
 
@@ -161,8 +207,8 @@ def _normalized_plate_weights(plates: List[WeightedItem]) -> List[Tuple[Fraction
     unique_weights = set()
     for plate in plates:
         try:
-            weight = _fraction_from_weight(plate.itemWeight, "Plate weight")
-        except ValueError:
+            weight = _fraction_from_weight(plate.itemWeight, FIELD_PLATE_WEIGHT)
+        except AppError:
             continue
 
         if weight > 0:
@@ -256,7 +302,11 @@ def seed_data() -> StandardResponse:
 @dataclass_to_dict
 def load_weighted_items(items_key: str) -> WeightedItemsResponse:
     if items_key not in SEED_ITEMS:
-        return WeightedItemsResponse(success=False, items=[], message="Unknown items key")
+        return WeightedItemsResponse(
+            success=False,
+            items=[],
+            messageKey="unknown_items_key",
+        )
 
     return WeightedItemsResponse(success=True, items=_load_saved_items(items_key))
 
@@ -264,7 +314,7 @@ def load_weighted_items(items_key: str) -> WeightedItemsResponse:
 @dataclass_to_dict
 def save_weighted_items(items_key: str, items: List[Dict]) -> StandardResponse:
     if items_key not in SEED_ITEMS:
-        return StandardResponse(success=False, message="Unknown items key")
+        return StandardResponse(success=False, messageKey="unknown_items_key")
 
     parsed_items = _parse_items(items_key, items)
 
@@ -275,13 +325,13 @@ def save_weighted_items(items_key: str, items: List[Dict]) -> StandardResponse:
 
 
 @dataclass_to_dict
-def calculate_barbell_plates(bar: Dict, target_weight: str) -> CalculationResponse:
+def calculate_barbell_plates(bar: Dict, target_weight: str, single_side_equipment: bool = False) -> CalculationResponse:
     parsed_bar = _parse_item(BARS_KEY, bar)
 
     try:
-        bar_weight = _fraction_from_weight(parsed_bar.itemWeight, "Bar weight")
-        requested_target_weight = _fraction_from_weight(str(target_weight), "Target weight")
-    except ValueError as error:
+        bar_weight = _fraction_from_weight(parsed_bar.itemWeight, FIELD_BAR_WEIGHT)
+        requested_target_weight = _fraction_from_weight(str(target_weight), FIELD_TARGET_WEIGHT)
+    except AppError as error:
         return CalculationResponse(
             success=False,
             bar=parsed_bar,
@@ -291,7 +341,8 @@ def calculate_barbell_plates(bar: Dict, target_weight: str) -> CalculationRespon
             achievedSideWeight="0",
             plates=[],
             exactMatch=False,
-            message=str(error),
+            messageKey=error.key,
+            messageData=error.data,
         )
 
     if requested_target_weight < bar_weight:
@@ -304,10 +355,13 @@ def calculate_barbell_plates(bar: Dict, target_weight: str) -> CalculationRespon
             achievedSideWeight="0",
             plates=[],
             exactMatch=False,
-            note="Target weight is lower than the selected bar weight. Using the bar only.",
+            noteKey="target_lower_than_bar",
         )
 
-    target_side_weight = (requested_target_weight - bar_weight) / 2
+    target_side_weight = requested_target_weight - bar_weight
+    if not single_side_equipment:
+        target_side_weight /= 2
+
     saved_plates = _load_saved_items(PLATES_KEY)
     calculation = _calculate_side_plate_loads(target_side_weight, saved_plates)
 
@@ -321,19 +375,24 @@ def calculate_barbell_plates(bar: Dict, target_weight: str) -> CalculationRespon
             achievedSideWeight="0",
             plates=[],
             exactMatch=False,
-            message="No valid plates are available for calculation.",
+            messageKey="no_valid_plates",
         )
 
     achieved_side_weight, plate_loads = calculation
-    achieved_total_weight = bar_weight + (achieved_side_weight * 2)
+    achieved_total_weight = bar_weight + achieved_side_weight
+    if not single_side_equipment:
+        achieved_total_weight += achieved_side_weight
+
     exact_match = achieved_side_weight == target_side_weight
-    note = ""
+    note_key = ""
+    note_data: Dict[str, str] = {}
 
     if not exact_match:
-        note = (
-            "Exact target is not possible with the available plates. "
-            f"Using {_fraction_to_string(achieved_total_weight)} kg instead of {_fraction_to_string(requested_target_weight)} kg."
-        )
+        note_key = "inexact_match"
+        note_data = {
+            "achievedWeight": _fraction_to_string(achieved_total_weight),
+            "targetWeight": _fraction_to_string(requested_target_weight),
+        }
 
     return CalculationResponse(
         success=True,
@@ -344,5 +403,6 @@ def calculate_barbell_plates(bar: Dict, target_weight: str) -> CalculationRespon
         achievedSideWeight=_fraction_to_string(achieved_side_weight),
         plates=plate_loads,
         exactMatch=exact_match,
-        note=note,
+        noteKey=note_key,
+        noteData=note_data,
     )
