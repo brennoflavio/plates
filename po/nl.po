@@ -8,231 +8,241 @@ msgstr ""
 "Project-Id-Version: plates.brennoflavio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-12 16:35+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-05-20 18:11+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/ubports/plates/nl/>"
+"\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 
 #: ../qml/AppBottomBar.qml:13 ../qml/Main.qml:336
 msgid "Calculator"
-msgstr ""
+msgstr "Rekenmachine"
 
 #: ../qml/AppBottomBar.qml:22 ../qml/PlatesPage.qml:5 plates.desktop.in.h:1
 msgid "Plates"
-msgstr ""
+msgstr "Schijven"
 
 #: ../qml/AppBottomBar.qml:31 ../qml/BarsPage.qml:5
 msgid "Bars"
-msgstr ""
+msgstr "Halters"
 
 #: ../qml/BarsPage.qml:6
 msgid "bar"
-msgstr ""
+msgstr "halter"
 
 #: ../qml/BarsPage.qml:9
 msgid "No bars yet"
-msgstr ""
+msgstr "Er zijn nog geen halters toegevoegd"
 
 #: ../qml/Main.qml:53 ../qml/Main.qml:368
 msgid "Target weight"
-msgstr ""
+msgstr "Streefgewicht"
 
 #: ../qml/Main.qml:55
 msgid "Bar weight"
-msgstr ""
+msgstr "Haltergewicht"
 
 #: ../qml/Main.qml:57
 msgid "Plate weight"
-msgstr ""
+msgstr "Schijfgewicht"
 
 #: ../qml/Main.qml:59 ../qml/WeightedItemsPage.qml:331
 #: ../qml/WeightedItemsPage.qml:338
 msgid "Weight"
-msgstr ""
+msgstr "Gewicht"
 
 #: ../qml/Main.qml:66
 msgid "Standard bar"
-msgstr ""
+msgstr "Standaardhalter"
 
 #: ../qml/Main.qml:68
 msgid "Short bar"
-msgstr ""
+msgstr "Korte halter"
 
 #: ../qml/Main.qml:70
 msgid "EZ bar"
-msgstr ""
+msgstr "EZ-halter"
 
 #: ../qml/Main.qml:72
 msgid "No bar"
-msgstr ""
+msgstr "Geen halter"
 
 #: ../qml/Main.qml:84 ../qml/WeightedItemsPage.qml:57
 #: ../qml/WeightedItemsPage.qml:178
 msgid "%1 kg"
-msgstr ""
+msgstr "%1 kg"
 
 #: ../qml/Main.qml:86
 msgid "%1 (%2 kg)"
-msgstr ""
+msgstr "%1 (%2 kg)"
 
 #: ../qml/Main.qml:94
 msgid "Backend not ready"
-msgstr ""
+msgstr "De aandrijving is nog niet gereed"
 
 #: ../qml/Main.qml:96
 msgid "Empty calculation response"
-msgstr ""
+msgstr "Er is geen berekening gedaan"
 
 #: ../qml/Main.qml:98
 msgid "Unknown items key"
-msgstr ""
+msgstr "Onbekende itemsleutel"
 
 #: ../qml/Main.qml:100
 msgid "%1 is required"
-msgstr ""
+msgstr "%1 is vereist"
 
 #: ../qml/Main.qml:102
 msgid "%1 must be a valid number"
-msgstr ""
+msgstr "%1 is geen geldig getal"
 
 #: ../qml/Main.qml:104
 msgid "%1 cannot be negative"
-msgstr ""
+msgstr "%1 mag geen negatieve waarde zijn"
 
 #: ../qml/Main.qml:106
 msgid "%1 can have at most %2 decimal places"
-msgstr ""
+msgstr "%1 mag maximaal %2 plaatsen achter de komma bevatten"
 
 #: ../qml/Main.qml:108
 msgid "%1 cannot be greater than %2 kg"
-msgstr ""
+msgstr "%1 mag niet groter zijn %2 kg"
 
 #: ../qml/Main.qml:110
 msgid "No valid plates are available for calculation."
-msgstr ""
+msgstr "Er zijn geen geldige schijven om berekeningen op uit te voeren."
 
 #: ../qml/Main.qml:112
 msgid "Something went wrong while talking to the backend."
-msgstr ""
+msgstr "Er is iets misgegaan tijdens de communicatie met de aandrijving."
 
 #: ../qml/Main.qml:114
 msgid "Unknown error"
-msgstr ""
+msgstr "Onbekende fout"
 
 #: ../qml/Main.qml:123
 msgid ""
 "Target weight is lower than the selected bar weight. Using the bar only."
 msgstr ""
+"Het streefgewicht is lager dan het gekozen haltergewicht. Er wordt alleen "
+"van dat laatste uitgegaan."
 
 #: ../qml/Main.qml:125
 msgid ""
 "Exact target is not possible with the available plates. Using %1 kg instead "
 "of %2 kg."
 msgstr ""
+"Het precieze streefgewicht is niet mogelijk met de gekozen schijven. Er "
+"wordt %1 kg gebruikt in plaats van %2 kg."
 
 #: ../qml/Main.qml:255
 msgid "Failed to load bars"
-msgstr ""
+msgstr "De halters kunnen niet worden geladen"
 
 #: ../qml/Main.qml:394
 msgid "Bar"
-msgstr ""
+msgstr "Halter"
 
 #: ../qml/Main.qml:429
 msgid "single side equipment"
-msgstr ""
+msgstr "halter met één schijfzijde"
 
 #: ../qml/Main.qml:437
 msgid "No bars available"
-msgstr ""
+msgstr "Er zijn geen halters beschikbaar"
 
 #: ../qml/Main.qml:444
 msgid "Calculate"
-msgstr ""
+msgstr "Berekenen"
 
 #: ../qml/Main.qml:465
 msgid ""
 "You asked for %1. This setup gives %2 total, with %3 on the loaded side."
 msgstr ""
+"Je doel is %1, maar de huidige instellingen geven in totaal %2, met %3 aan "
+"de bevestigde zijde."
 
 #: ../qml/Main.qml:466
 msgid "You asked for %1. This setup gives %2 total, with %3 on each side."
 msgstr ""
+"Je doel is %1, maar de huidige instellingen geven in totaal %2, met %3 aan "
+"iedere zijde."
 
 #: ../qml/PlatesPage.qml:6
 msgid "plate"
-msgstr ""
+msgstr "schijf"
 
 #: ../qml/PlatesPage.qml:9
 msgid "No plates yet"
-msgstr ""
+msgstr "Er zijn nog geen schijven toegevoegd"
 
 #: ../qml/WeightedItemsPage.qml:198 ../qml/WeightedItemsPage.qml:280
 msgid "Delete"
-msgstr ""
+msgstr "Verwijderen"
 
 #: ../qml/WeightedItemsPage.qml:213
 msgid "Edit"
-msgstr ""
+msgstr "Bewerken"
 
 #: ../qml/WeightedItemsPage.qml:242 ../qml/WeightedItemsPage.qml:310
 msgid "Add %1"
-msgstr ""
+msgstr "%1 toevoegen"
 
 #: ../qml/WeightedItemsPage.qml:275
 msgid "Delete %1"
-msgstr ""
+msgstr "%1 verwijderen"
 
 #: ../qml/WeightedItemsPage.qml:276
 msgid "Are you sure you want to delete %1?"
-msgstr ""
+msgstr "Weet je zeker dat je de %1 wilt verwijderen?"
 
 #: ../qml/WeightedItemsPage.qml:290 ../qml/WeightedItemsPage.qml:364
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #: ../qml/WeightedItemsPage.qml:310
 msgid "Edit %1"
-msgstr ""
+msgstr "%1 bewerken"
 
 #: ../qml/WeightedItemsPage.qml:316 ../qml/WeightedItemsPage.qml:325
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #: ../qml/WeightedItemsPage.qml:349
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 #: ../qml/ut_components/ActionableList.qml:107
 #: ../qml/ut_components/CardList.qml:84
 msgid "Search"
-msgstr ""
+msgstr "Zoeken"
 
 #: ../qml/ut_components/ActionableList.qml:109
 #: ../qml/ut_components/CardList.qml:82
 msgid "No items"
-msgstr ""
+msgstr "Er zijn geen items"
 
 #: ../qml/ut_components/AppHeader.qml:78
 msgid "Back"
-msgstr ""
+msgstr "Terug"
 
 #: ../qml/ut_components/AppHeader.qml:94
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: ../qml/ut_components/Form.qml:81
 msgid "Submit"
-msgstr ""
+msgstr "Toevoegen"
 
 #: ../qml/ut_components/InputField.qml:91
 msgid "Invalid input"
-msgstr ""
+msgstr "De invoer is ongeldig"
 
 #: ../qml/ut_components/InputField.qml:166
 msgid "This field is required"
-msgstr ""
+msgstr "Dit veld is vereist"
