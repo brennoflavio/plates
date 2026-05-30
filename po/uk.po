@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plates.brennoflavio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-12 16:35+0000\n"
-"PO-Revision-Date: 2026-05-30 18:46+0000\n"
+"PO-Revision-Date: 2026-05-31 21:01+0000\n"
 "Last-Translator: Serhii Horichenko <serhii@horichenko.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/ubports/plates/"
 "uk/>\n"
@@ -26,19 +26,19 @@ msgstr "Калькулятор"
 
 #: ../qml/AppBottomBar.qml:22 ../qml/PlatesPage.qml:5 plates.desktop.in.h:1
 msgid "Plates"
-msgstr "Тарілки"
+msgstr "Диски"
 
 #: ../qml/AppBottomBar.qml:31 ../qml/BarsPage.qml:5
 msgid "Bars"
-msgstr "Бари"
+msgstr "Грифи"
 
 #: ../qml/BarsPage.qml:6
 msgid "bar"
-msgstr "бар"
+msgstr "гриф"
 
 #: ../qml/BarsPage.qml:9
 msgid "No bars yet"
-msgstr "Барів ще немає"
+msgstr "Грифів ще немає"
 
 #: ../qml/Main.qml:53 ../qml/Main.qml:368
 msgid "Target weight"
@@ -46,11 +46,11 @@ msgstr "Цільова вага"
 
 #: ../qml/Main.qml:55
 msgid "Bar weight"
-msgstr "Вага бару"
+msgstr "Вага грифа"
 
 #: ../qml/Main.qml:57
 msgid "Plate weight"
-msgstr "Вага тарілки"
+msgstr "Вага диска"
 
 #: ../qml/Main.qml:59 ../qml/WeightedItemsPage.qml:331
 #: ../qml/WeightedItemsPage.qml:338
@@ -59,7 +59,7 @@ msgstr "Вага"
 
 #: ../qml/Main.qml:66
 msgid "Standard bar"
-msgstr "Стандартний бар"
+msgstr "Стандартний гриф"
 
 #: ../qml/Main.qml:68
 msgid "Short bar"
@@ -67,83 +67,86 @@ msgstr "Короткий гриф"
 
 #: ../qml/Main.qml:70
 msgid "EZ bar"
-msgstr "Короткий (EZ) гриф"
+msgstr "Зігнутий (EZ) гриф"
 
 #: ../qml/Main.qml:72
 msgid "No bar"
-msgstr ""
+msgstr "Без грифа"
 
 #: ../qml/Main.qml:84 ../qml/WeightedItemsPage.qml:57
 #: ../qml/WeightedItemsPage.qml:178
 msgid "%1 kg"
-msgstr ""
+msgstr "%1 кг"
 
 #: ../qml/Main.qml:86
 msgid "%1 (%2 kg)"
-msgstr ""
+msgstr "%1 (%2 кг)"
 
 #: ../qml/Main.qml:94
 msgid "Backend not ready"
-msgstr ""
+msgstr "Сервер не готовий"
 
 #: ../qml/Main.qml:96
 msgid "Empty calculation response"
-msgstr ""
+msgstr "Відповідь на обчислення порожня"
 
 #: ../qml/Main.qml:98
 msgid "Unknown items key"
-msgstr ""
+msgstr "Невідомий ключ елементів"
 
 #: ../qml/Main.qml:100
 msgid "%1 is required"
-msgstr ""
+msgstr "Вимагається %1"
 
 #: ../qml/Main.qml:102
 msgid "%1 must be a valid number"
-msgstr ""
+msgstr "%1 повинне бути дійсним числом"
 
 #: ../qml/Main.qml:104
 msgid "%1 cannot be negative"
-msgstr ""
+msgstr "%1 не може бути від'ємним"
 
 #: ../qml/Main.qml:106
 msgid "%1 can have at most %2 decimal places"
-msgstr ""
+msgstr "%1 може мати найбільше %2 дрібних дисків"
 
 #: ../qml/Main.qml:108
 msgid "%1 cannot be greater than %2 kg"
-msgstr ""
+msgstr "%1 не може бути більше за %2 кг"
 
 #: ../qml/Main.qml:110
 msgid "No valid plates are available for calculation."
-msgstr ""
+msgstr "Для обчислення немає правильних дисків."
 
 #: ../qml/Main.qml:112
 msgid "Something went wrong while talking to the backend."
-msgstr ""
+msgstr "Під час спілкування із сервером щось пішло не так."
 
 #: ../qml/Main.qml:114
 msgid "Unknown error"
-msgstr ""
+msgstr "Невідома помилка"
 
 #: ../qml/Main.qml:123
 msgid ""
 "Target weight is lower than the selected bar weight. Using the bar only."
 msgstr ""
+"Цільова вага менше за вагу обраного грифа. Використовується тільки гриф."
 
 #: ../qml/Main.qml:125
 msgid ""
 "Exact target is not possible with the available plates. Using %1 kg instead "
 "of %2 kg."
 msgstr ""
+"Точна вага з доступними дисками неможлива. Використовується %1 кг замість %2 "
+"кг."
 
 #: ../qml/Main.qml:255
 msgid "Failed to load bars"
-msgstr ""
+msgstr "Помилка завантаження грифів"
 
 #: ../qml/Main.qml:394
 msgid "Bar"
-msgstr "Бар"
+msgstr "Гриф"
 
 #: ../qml/Main.qml:429
 msgid "single side equipment"
@@ -151,7 +154,7 @@ msgstr "одностороннє обладнання"
 
 #: ../qml/Main.qml:437
 msgid "No bars available"
-msgstr "Бари не доступні"
+msgstr "Грифи не доступні"
 
 #: ../qml/Main.qml:444
 msgid "Calculate"
@@ -161,21 +164,21 @@ msgstr "Обчислити"
 msgid ""
 "You asked for %1. This setup gives %2 total, with %3 on the loaded side."
 msgstr ""
-"Ви запитали про %1. Ці налаштування надають загалом %2, з %3 на "
-"завантаженому боці."
+"Ви запитали про %1. Ці налаштування дають загалом %2, з %3 на завантаженому "
+"боці."
 
 #: ../qml/Main.qml:466
 msgid "You asked for %1. This setup gives %2 total, with %3 on each side."
 msgstr ""
-"Ви запитали про %1. Ці налаштування надають загалом %2, з %3 на кожному боці."
+"Ви запитали про %1. Ці налаштування дають загалом %2, по %3 з кожного боку."
 
 #: ../qml/PlatesPage.qml:6
 msgid "plate"
-msgstr "тарілка"
+msgstr "диск"
 
 #: ../qml/PlatesPage.qml:9
 msgid "No plates yet"
-msgstr "Тарілок ще немає"
+msgstr "Дисків ще немає"
 
 #: ../qml/WeightedItemsPage.qml:198 ../qml/WeightedItemsPage.qml:280
 msgid "Delete"
@@ -237,8 +240,8 @@ msgstr "Надіслати"
 
 #: ../qml/ut_components/InputField.qml:91
 msgid "Invalid input"
-msgstr ""
+msgstr "Хибне введення"
 
 #: ../qml/ut_components/InputField.qml:166
 msgid "This field is required"
-msgstr ""
+msgstr "Це поле обов'язкове"
