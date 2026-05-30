@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plates.brennoflavio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-12 16:35+0000\n"
-"PO-Revision-Date: 2026-05-30 12:39+0000\n"
+"PO-Revision-Date: 2026-05-30 18:46+0000\n"
 "Last-Translator: Serhii Horichenko <serhii@horichenko.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/ubports/plates/"
 "uk/>\n"
@@ -22,52 +22,52 @@ msgstr ""
 
 #: ../qml/AppBottomBar.qml:13 ../qml/Main.qml:336
 msgid "Calculator"
-msgstr ""
+msgstr "Калькулятор"
 
 #: ../qml/AppBottomBar.qml:22 ../qml/PlatesPage.qml:5 plates.desktop.in.h:1
 msgid "Plates"
-msgstr ""
+msgstr "Тарілки"
 
 #: ../qml/AppBottomBar.qml:31 ../qml/BarsPage.qml:5
 msgid "Bars"
-msgstr ""
+msgstr "Бари"
 
 #: ../qml/BarsPage.qml:6
 msgid "bar"
-msgstr ""
+msgstr "бар"
 
 #: ../qml/BarsPage.qml:9
 msgid "No bars yet"
-msgstr ""
+msgstr "Барів ще немає"
 
 #: ../qml/Main.qml:53 ../qml/Main.qml:368
 msgid "Target weight"
-msgstr ""
+msgstr "Цільова вага"
 
 #: ../qml/Main.qml:55
 msgid "Bar weight"
-msgstr ""
+msgstr "Вага бару"
 
 #: ../qml/Main.qml:57
 msgid "Plate weight"
-msgstr ""
+msgstr "Вага тарілки"
 
 #: ../qml/Main.qml:59 ../qml/WeightedItemsPage.qml:331
 #: ../qml/WeightedItemsPage.qml:338
 msgid "Weight"
-msgstr ""
+msgstr "Вага"
 
 #: ../qml/Main.qml:66
 msgid "Standard bar"
-msgstr ""
+msgstr "Стандартний бар"
 
 #: ../qml/Main.qml:68
 msgid "Short bar"
-msgstr ""
+msgstr "Короткий гриф"
 
 #: ../qml/Main.qml:70
 msgid "EZ bar"
-msgstr ""
+msgstr "Короткий (EZ) гриф"
 
 #: ../qml/Main.qml:72
 msgid "No bar"
@@ -143,56 +143,59 @@ msgstr ""
 
 #: ../qml/Main.qml:394
 msgid "Bar"
-msgstr ""
+msgstr "Бар"
 
 #: ../qml/Main.qml:429
 msgid "single side equipment"
-msgstr ""
+msgstr "одностороннє обладнання"
 
 #: ../qml/Main.qml:437
 msgid "No bars available"
-msgstr ""
+msgstr "Бари не доступні"
 
 #: ../qml/Main.qml:444
 msgid "Calculate"
-msgstr ""
+msgstr "Обчислити"
 
 #: ../qml/Main.qml:465
 msgid ""
 "You asked for %1. This setup gives %2 total, with %3 on the loaded side."
 msgstr ""
+"Ви запитали про %1. Ці налаштування надають загалом %2, з %3 на "
+"завантаженому боці."
 
 #: ../qml/Main.qml:466
 msgid "You asked for %1. This setup gives %2 total, with %3 on each side."
 msgstr ""
+"Ви запитали про %1. Ці налаштування надають загалом %2, з %3 на кожному боці."
 
 #: ../qml/PlatesPage.qml:6
 msgid "plate"
-msgstr ""
+msgstr "тарілка"
 
 #: ../qml/PlatesPage.qml:9
 msgid "No plates yet"
-msgstr ""
+msgstr "Тарілок ще немає"
 
 #: ../qml/WeightedItemsPage.qml:198 ../qml/WeightedItemsPage.qml:280
 msgid "Delete"
-msgstr ""
+msgstr "Видалити"
 
 #: ../qml/WeightedItemsPage.qml:213
 msgid "Edit"
-msgstr ""
+msgstr "Редагувати"
 
 #: ../qml/WeightedItemsPage.qml:242 ../qml/WeightedItemsPage.qml:310
 msgid "Add %1"
-msgstr ""
+msgstr "Додати %1"
 
 #: ../qml/WeightedItemsPage.qml:275
 msgid "Delete %1"
-msgstr ""
+msgstr "Видалити %1"
 
 #: ../qml/WeightedItemsPage.qml:276
 msgid "Are you sure you want to delete %1?"
-msgstr ""
+msgstr "Ви дійсно бажаєте видалити %1?"
 
 #: ../qml/WeightedItemsPage.qml:290 ../qml/WeightedItemsPage.qml:364
 msgid "Cancel"
@@ -200,20 +203,20 @@ msgstr "Скасувати"
 
 #: ../qml/WeightedItemsPage.qml:310
 msgid "Edit %1"
-msgstr ""
+msgstr "Редагувати %1"
 
 #: ../qml/WeightedItemsPage.qml:316 ../qml/WeightedItemsPage.qml:325
 msgid "Name"
-msgstr ""
+msgstr "Назва"
 
 #: ../qml/WeightedItemsPage.qml:349
 msgid "Save"
-msgstr ""
+msgstr "Зберегти"
 
 #: ../qml/ut_components/ActionableList.qml:107
 #: ../qml/ut_components/CardList.qml:84
 msgid "Search"
-msgstr ""
+msgstr "Пошук"
 
 #: ../qml/ut_components/ActionableList.qml:109
 #: ../qml/ut_components/CardList.qml:82
