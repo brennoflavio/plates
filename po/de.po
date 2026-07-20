@@ -8,18 +8,20 @@ msgstr ""
 "Project-Id-Version: plates.brennoflavio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-12 16:35+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-07-21 19:01+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/ubports/plates/"
+"de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 
 #: ../qml/AppBottomBar.qml:13 ../qml/Main.qml:336
 msgid "Calculator"
-msgstr ""
+msgstr "Taschenrechner"
 
 #: ../qml/AppBottomBar.qml:22 ../qml/PlatesPage.qml:5 plates.desktop.in.h:1
 msgid "Plates"
@@ -27,23 +29,23 @@ msgstr ""
 
 #: ../qml/AppBottomBar.qml:31 ../qml/BarsPage.qml:5
 msgid "Bars"
-msgstr ""
+msgstr "Stangen"
 
 #: ../qml/BarsPage.qml:6
 msgid "bar"
-msgstr ""
+msgstr "Stange"
 
 #: ../qml/BarsPage.qml:9
 msgid "No bars yet"
-msgstr ""
+msgstr "Noch keine Stangen"
 
 #: ../qml/Main.qml:53 ../qml/Main.qml:368
 msgid "Target weight"
-msgstr ""
+msgstr "Zielgewicht"
 
 #: ../qml/Main.qml:55
 msgid "Bar weight"
-msgstr ""
+msgstr "Stangengewicht"
 
 #: ../qml/Main.qml:57
 msgid "Plate weight"
@@ -52,36 +54,36 @@ msgstr ""
 #: ../qml/Main.qml:59 ../qml/WeightedItemsPage.qml:331
 #: ../qml/WeightedItemsPage.qml:338
 msgid "Weight"
-msgstr ""
+msgstr "Gewicht"
 
 #: ../qml/Main.qml:66
 msgid "Standard bar"
-msgstr ""
+msgstr "Standardstange"
 
 #: ../qml/Main.qml:68
 msgid "Short bar"
-msgstr ""
+msgstr "Kurzstange"
 
 #: ../qml/Main.qml:70
 msgid "EZ bar"
-msgstr ""
+msgstr "EZ-Stange"
 
 #: ../qml/Main.qml:72
 msgid "No bar"
-msgstr ""
+msgstr "Keine Stange"
 
 #: ../qml/Main.qml:84 ../qml/WeightedItemsPage.qml:57
 #: ../qml/WeightedItemsPage.qml:178
 msgid "%1 kg"
-msgstr ""
+msgstr "%1 kg"
 
 #: ../qml/Main.qml:86
 msgid "%1 (%2 kg)"
-msgstr ""
+msgstr "%1 (%2 kg)"
 
 #: ../qml/Main.qml:94
 msgid "Backend not ready"
-msgstr ""
+msgstr "Backend nicht bereit"
 
 #: ../qml/Main.qml:96
 msgid "Empty calculation response"
@@ -93,15 +95,15 @@ msgstr ""
 
 #: ../qml/Main.qml:100
 msgid "%1 is required"
-msgstr ""
+msgstr "%1 ist erforderlich"
 
 #: ../qml/Main.qml:102
 msgid "%1 must be a valid number"
-msgstr ""
+msgstr "%1 muss eine gültige Zahl sein"
 
 #: ../qml/Main.qml:104
 msgid "%1 cannot be negative"
-msgstr ""
+msgstr "%1 darf nicht negativ sein"
 
 #: ../qml/Main.qml:106
 msgid "%1 can have at most %2 decimal places"
@@ -109,7 +111,7 @@ msgstr ""
 
 #: ../qml/Main.qml:108
 msgid "%1 cannot be greater than %2 kg"
-msgstr ""
+msgstr "%1 darf nicht größer als %2 kg sein"
 
 #: ../qml/Main.qml:110
 msgid "No valid plates are available for calculation."
@@ -121,7 +123,7 @@ msgstr ""
 
 #: ../qml/Main.qml:114
 msgid "Unknown error"
-msgstr ""
+msgstr "Unbekannter Fehler"
 
 #: ../qml/Main.qml:123
 msgid ""
@@ -140,7 +142,7 @@ msgstr ""
 
 #: ../qml/Main.qml:394
 msgid "Bar"
-msgstr ""
+msgstr "Stange"
 
 #: ../qml/Main.qml:429
 msgid "single side equipment"
@@ -148,11 +150,11 @@ msgstr ""
 
 #: ../qml/Main.qml:437
 msgid "No bars available"
-msgstr ""
+msgstr "Keine Stangen verfügbar"
 
 #: ../qml/Main.qml:444
 msgid "Calculate"
-msgstr ""
+msgstr "Berechnen"
 
 #: ../qml/Main.qml:465
 msgid ""
@@ -173,19 +175,19 @@ msgstr ""
 
 #: ../qml/WeightedItemsPage.qml:198 ../qml/WeightedItemsPage.qml:280
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: ../qml/WeightedItemsPage.qml:213
 msgid "Edit"
-msgstr ""
+msgstr "Bearbeiten"
 
 #: ../qml/WeightedItemsPage.qml:242 ../qml/WeightedItemsPage.qml:310
 msgid "Add %1"
-msgstr ""
+msgstr "%1 hinzufügen"
 
 #: ../qml/WeightedItemsPage.qml:275
 msgid "Delete %1"
-msgstr ""
+msgstr "%1 löschen"
 
 #: ../qml/WeightedItemsPage.qml:276
 msgid "Are you sure you want to delete %1?"
@@ -193,24 +195,24 @@ msgstr ""
 
 #: ../qml/WeightedItemsPage.qml:290 ../qml/WeightedItemsPage.qml:364
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: ../qml/WeightedItemsPage.qml:310
 msgid "Edit %1"
-msgstr ""
+msgstr "%1 bearbeiten"
 
 #: ../qml/WeightedItemsPage.qml:316 ../qml/WeightedItemsPage.qml:325
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: ../qml/WeightedItemsPage.qml:349
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: ../qml/ut_components/ActionableList.qml:107
 #: ../qml/ut_components/CardList.qml:84
 msgid "Search"
-msgstr ""
+msgstr "Suchen"
 
 #: ../qml/ut_components/ActionableList.qml:109
 #: ../qml/ut_components/CardList.qml:82
@@ -219,20 +221,20 @@ msgstr ""
 
 #: ../qml/ut_components/AppHeader.qml:78
 msgid "Back"
-msgstr ""
+msgstr "Zurück"
 
 #: ../qml/ut_components/AppHeader.qml:94
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: ../qml/ut_components/Form.qml:81
 msgid "Submit"
-msgstr ""
+msgstr "Absenden"
 
 #: ../qml/ut_components/InputField.qml:91
 msgid "Invalid input"
-msgstr ""
+msgstr "Ungültige Eingabe"
 
 #: ../qml/ut_components/InputField.qml:166
 msgid "This field is required"
-msgstr ""
+msgstr "Dieses Feld ist erforderlich"
