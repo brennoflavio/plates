@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plates.brennoflavio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-12 16:35+0000\n"
-"PO-Revision-Date: 2026-08-28 18:43+0000\n"
+"PO-Revision-Date: 2026-08-30 08:15+0000\n"
 "Last-Translator: Alagirisamy Rengaraj <radhaalagirisamy@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/ubports/plates/ta/>"
 "\n"
@@ -175,7 +175,7 @@ msgstr ""
 
 #: ../qml/WeightedItemsPage.qml:198 ../qml/WeightedItemsPage.qml:280
 msgid "Delete"
-msgstr ""
+msgstr "நீக்கு"
 
 #: ../qml/WeightedItemsPage.qml:213
 msgid "Edit"
@@ -207,7 +207,7 @@ msgstr ""
 
 #: ../qml/WeightedItemsPage.qml:349
 msgid "Save"
-msgstr ""
+msgstr "சேமி"
 
 #: ../qml/ut_components/ActionableList.qml:107
 #: ../qml/ut_components/CardList.qml:84
